@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pd_web/theme.dart';
 
-class ResponcesView extends StatelessWidget {
-  const ResponcesView({super.key});
+class RequestsView extends StatelessWidget {
+  const RequestsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -175,6 +175,37 @@ class ResponcesView extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                width: double.infinity,
+                height: 1,
+                color: const Color(0xffDEE2E6),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                          Color(
+                            0xff6C757D,
+                          ),
+                        ),
+                      ),
+                      child: const Text('Отклонить'),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Принять'),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
