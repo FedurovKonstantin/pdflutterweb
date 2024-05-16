@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pd_web/profile/profile_page.dart';
 import 'package:pd_web/theme.dart';
-import 'package:pd_web/ts_page.dart';
+
+import 'ts/ts_page.dart';
 
 void main() {
   runApp(MyApp());

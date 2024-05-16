@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      initialIndex: 2,
+      initialIndex: 0,
       child: Column(
         children: [
           Container(
@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 65,
-                    vertical: 22,
+                    vertical: 20,
                   ),
                   child: [
                     const CVView(),
