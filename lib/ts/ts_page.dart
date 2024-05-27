@@ -1,9 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pd_web/TS/cv_view.dart';
-import 'package:pd_web/TS/requests_view.dart';
-import 'package:pd_web/TS/responces_view.dart';
 import 'package:pd_web/theme.dart';
 import 'package:pd_web/ts/students_view.dart';
 
