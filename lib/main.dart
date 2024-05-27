@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late var currentContent = content.keys.toList()[1];
+  late var currentContent = content.keys.toList()[0];
 
   final content = <String, Widget>{
     "Команды и студенты": const TSPage(),

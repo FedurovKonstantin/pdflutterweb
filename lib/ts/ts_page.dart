@@ -1,10 +1,13 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:pd_web/TS/cv_view.dart';
 import 'package:pd_web/TS/requests_view.dart';
 import 'package:pd_web/TS/responces_view.dart';
 import 'package:pd_web/theme.dart';
+import 'package:pd_web/ts/students_view.dart';
 
-import 'team_view.dart';
+import 'teams_view.dart';
 
 class TSPage extends StatefulWidget {
   const TSPage({super.key});
@@ -22,7 +25,7 @@ class _TSPageState extends State<TSPage> {
       child: Column(
         children: [
           Container(
-            color: Colors.grey[200],
+            color: Colors.grey[100],
             // height: 79,
             width: double.infinity,
             child: Padding(
@@ -99,10 +102,8 @@ class _TSPageState extends State<TSPage> {
                     vertical: 20,
                   ),
                   child: [
-                    const CVView(),
-                    const ResponcesView(),
-                    // const TeamView(),
-                    // const RequestsView(),
+                    const TeamsView(),
+                    const StudentsView(),
                   ]![DefaultTabController.of(context).index],
                 ),
               );
