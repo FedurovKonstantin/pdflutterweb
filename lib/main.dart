@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pd_web/profile/profile_page.dart';
@@ -19,9 +17,10 @@ final _router = GoRouter(
       builder: (context, state) => Center(
         child: ElevatedButton(
           onPressed: () {
+            final link = state.uri.queryParameters['link'];
             js.context.callMethod(
               'open',
-              ['https://stackoverflow.com/questions/ask'],
+              [link],
             );
           },
           child: Text('Войти'),
