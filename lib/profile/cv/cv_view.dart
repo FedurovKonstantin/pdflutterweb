@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pd_web/theme.dart';
 
 class CVView extends StatelessWidget {
-  const CVView({super.key});
+  final bool canEdit;
+
+  const CVView({
+    required this.canEdit,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

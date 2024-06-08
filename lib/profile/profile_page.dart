@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pd_web/profile/cv_view.dart';
+import 'package:pd_web/profile/cv/cv_view.dart';
 import 'package:pd_web/profile/requests_view.dart';
 import 'package:pd_web/profile/responces_view.dart';
 import 'package:pd_web/theme.dart';
@@ -65,7 +65,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     vertical: 20,
                   ),
                   child: [
-                    const CVView(),
+                    const CVView(
+                      canEdit: true,
+                    ),
                     const ResponcesView(),
                     const TeamView(),
                     const RequestsView(),

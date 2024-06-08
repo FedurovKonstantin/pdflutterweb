@@ -4,6 +4,7 @@ import 'package:pd_web/profile/profile_page.dart';
 import 'package:pd_web/theme.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'dart:js' as js;
+import 'ts/teams/teams_filter_controller.dart';
 import 'ts/ts_page.dart';
 
 final _router = GoRouter(
@@ -61,7 +62,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late var currentContent = content.keys.toList()[0];
+  late var currentContent = content.keys.toList()[1];
 
   late final content = <String, Widget>{
     "Команды и студенты": const TSPage(),
@@ -69,6 +70,11 @@ class _HomeState extends State<Home> {
     "Треки": Container(),
     "Админка": Container(),
   };
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

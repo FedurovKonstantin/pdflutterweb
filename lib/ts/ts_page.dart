@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pd_web/theme.dart';
 import 'package:pd_web/ts/students_view.dart';
 
-import 'teams_view.dart';
+import 'teams/teams_view.dart';
 
 class TSPage extends StatefulWidget {
   const TSPage({super.key});
