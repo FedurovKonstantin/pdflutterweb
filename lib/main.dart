@@ -1,13 +1,32 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pd_web/profile/profile_page.dart';
 import 'package:pd_web/theme.dart';
+import 'package:pd_web/user_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'dart:js' as js;
 import 'ts/teams/teams_filter_controller.dart';
 import 'ts/ts_page.dart';
 
 final _router = GoRouter(
+  redirect: (context, state) {
+    final token = state.uri.queryParameters['token'];
+    if (token != null && state.fullPath == '/') {
+      final decodedToken = JwtDecoder.decode(token);
+      userController.setUser(
+        UserData(
+          fio: decodedToken['name'],
+          email: decodedToken['preferred_username'],
+        ),
+      );
+      return '/';
+    } else if (userController.controller.valueOrNull == null) {
+      return '/sign_in';
+    }
+  },
   routes: [
     GoRoute(
       path: '/',
@@ -18,7 +37,8 @@ final _router = GoRouter(
       builder: (context, state) => Center(
         child: ElevatedButton(
           onPressed: () {
-            final link = state.uri.queryParameters['link'];
+            final link =
+                'https://147.45.108.155:8080/oauth2/authorization/azure';
             js.context.callMethod(
               'open',
               [link],

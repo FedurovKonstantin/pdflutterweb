@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pd_web/theme.dart';
+import 'package:pd_web/user_controller.dart';
 
 class CVView extends StatelessWidget {
   final bool canEdit;
@@ -14,8 +15,8 @@ class CVView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Иванов Иван Иванович',
+        Text(
+          userController.controller.value.fio ?? '',
           style: TextStyle(
             color: Color(0xff212529),
             fontSize: 24,
