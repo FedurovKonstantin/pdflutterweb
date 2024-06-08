@@ -8,11 +8,10 @@ import 'package:pd_web/theme.dart';
 import 'package:pd_web/user_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'dart:js' as js;
-import 'ts/teams/teams_filter_controller.dart';
 import 'ts/ts_page.dart';
 
 final _router = GoRouter(
-  redirect: (context, state) {
+  redirect: (context, state) async {
     final token = state.uri.queryParameters['token'];
     if (token != null && state.fullPath == '/') {
       final decodedToken = JwtDecoder.decode(token);
@@ -22,6 +21,8 @@ final _router = GoRouter(
           email: decodedToken['preferred_username'],
         ),
       );
+
+      userController.updateUser();
       return '/';
     } else if (userController.controller.valueOrNull == null) {
       return '/sign_in';

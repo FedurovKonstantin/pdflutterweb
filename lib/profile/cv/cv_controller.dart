@@ -1,117 +1,72 @@
-// This file is "main.dart"
 import 'dart:async';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pd_web/ts/teams/teams_filter_controller.dart';
+import 'package:pd_web/user_controller.dart';
 import 'package:rxdart/subjects.dart';
 
-part 'cv_controller.freezed.dart';
-part 'cv_controller.g.dart';
+final cvController = CVController();
 
-@freezed
-class StudentData with _$StudentData {
-  const factory StudentData({
-    required String fio,
-    int? course,
-    int? groupNumber,
-    String? contacts,
-    String? tags,
-    String? trackType,
-  }) = _StudentData;
+class CVController {
+  final _controller = userController.controller;
 
-  factory StudentData.fromJson(Map<String, Object?> json) =>
-      _$StudentDataFromJson(json);
-}
+  CVController() {}
 
-final cvController = TeamsController();
-
-class TeamsController {
-  final controller = BehaviorSubject.seeded(
-    StudentData(
-      fio: '',
-    ),
-  );
-
-  TeamsController() {
-    // _loadSkills();
-    // _loadTracks();
+  void selectTrackType(String trackType) {
+    _controller.add(
+      _controller.value.copyWith(
+        trackType: trackType,
+      ),
+    );
   }
 
-  // void selectSkill(String skill) {
-  //   if (controller.value.selectedSkills.contains(skill)) {
-  //     controller.add(
-  //       controller.value.copyWith(
-  //         selectedSkills: List.of(controller.value.selectedSkills)
-  //           ..remove(skill),
-  //       ),
-  //     );
-  //   } else {
-  //     controller.add(
-  //       controller.value.copyWith(
-  //         selectedSkills: List.of(controller.value.selectedSkills)..add(skill),
-  //       ),
-  //     );
-  //   }
-  // }
+  void selectCourse(int course) {
+    _controller.add(
+      _controller.value.copyWith(
+        course: course,
+      ),
+    );
+  }
 
-  // void selectTrack(String track) {
-  //   if (controller.value.selectedTracks.contains(track)) {
-  //     controller.add(
-  //       controller.value.copyWith(
-  //         selectedTracks: List.of(controller.value.selectedTracks)
-  //           ..remove(track),
-  //       ),
-  //     );
-  //   } else {
-  //     controller.add(
-  //       controller.value.copyWith(
-  //         selectedTracks: List.of(controller.value.selectedTracks)..add(track),
-  //       ),
-  //     );
-  //   }
-  // }
+  void selectSkill(String skill) {
+    final skills = teamsController.controller.value.skills;
+    final userSkills = _controller.value.tags?.split(' ') ?? [];
+    if (userSkills.contains(skill)) {
+      _controller.add(
+        _controller.value.copyWith(
+          tags: (List.of(userSkills)..remove(skill)).join(' '),
+        ),
+      );
+    } else {
+      _controller.add(
+        _controller.value.copyWith(
+          tags: (List.of(userSkills)..add(skill)).join(' '),
+        ),
+      );
+    }
+  }
 
-  // void selectProjectType(String type) {
-  //   if (controller.value.selectedProjectTypes.contains(type)) {
-  //     controller.add(
-  //       controller.value.copyWith(
-  //         selectedProjectTypes: List.of(controller.value.selectedProjectTypes)
-  //           ..remove(type),
-  //       ),
-  //     );
-  //   } else {
-  //     controller.add(
-  //       controller.value.copyWith(
-  //         selectedProjectTypes: List.of(controller.value.selectedProjectTypes)
-  //           ..add(type),
-  //       ),
-  //     );
-  //   }
-  // }
+  Future<void> save() async {
+    final user = _controller.value;
+    if (user.id == null) {
+      try {
+        await dio.post(
+          '/api/v1/students/register/${user.trackType == 'Бакалавр' ? 'master' : 'bachelor'}',
+          data: user.toJson(),
+        );
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      try {
+        await dio.post(
+          '/api/v1/students/changeStudentData',
+          data: user.toJson(),
+        );
+      } catch (e) {
+        print(e);
+      }
+    }
 
-  // Future<void> _loadSkills() async {
-  //   final responce = await dio.get('/api/v1/tags');
-  //   final skills = (responce.data as String).split(' ');
-  //   controller.add(
-  //     controller.value.copyWith(
-  //       skills: skills,
-  //     ),
-  //   );
-  // }
-
-  // Future<void> _loadTracks() async {
-  //   final responce = await dio.get('/api/v1/tracks/all');
-  //   final tracks = (responce.data as List<dynamic>)
-  //       .map(
-  //         (e) => TrackData.fromJson(e),
-  //       )
-  //       .map((e) => e.name)
-  //       .toList();
-  //   controller.add(
-  //     controller.value.copyWith(
-  //       tracks: tracks,
-  //     ),
-  //   );
-  // }
+    userController.updateUser();
+  }
 }

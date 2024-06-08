@@ -22,11 +22,14 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 mixin _$UserData {
   String get fio => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   int? get course => throw _privateConstructorUsedError;
   int? get groupNumber => throw _privateConstructorUsedError;
   String? get contacts => throw _privateConstructorUsedError;
   String? get tags => throw _privateConstructorUsedError;
   String? get trackType => throw _privateConstructorUsedError;
+  String? get aboutSelf => throw _privateConstructorUsedError;
+  int? get trackId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,11 +45,14 @@ abstract class $UserDataCopyWith<$Res> {
   $Res call(
       {String fio,
       String email,
+      int? id,
       int? course,
       int? groupNumber,
       String? contacts,
       String? tags,
-      String? trackType});
+      String? trackType,
+      String? aboutSelf,
+      int? trackId});
 }
 
 /// @nodoc
@@ -64,11 +70,14 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   $Res call({
     Object? fio = null,
     Object? email = null,
+    Object? id = freezed,
     Object? course = freezed,
     Object? groupNumber = freezed,
     Object? contacts = freezed,
     Object? tags = freezed,
     Object? trackType = freezed,
+    Object? aboutSelf = freezed,
+    Object? trackId = freezed,
   }) {
     return _then(_value.copyWith(
       fio: null == fio
@@ -79,6 +88,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       course: freezed == course
           ? _value.course
           : course // ignore: cast_nullable_to_non_nullable
@@ -99,6 +112,14 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.trackType
           : trackType // ignore: cast_nullable_to_non_nullable
               as String?,
+      aboutSelf: freezed == aboutSelf
+          ? _value.aboutSelf
+          : aboutSelf // ignore: cast_nullable_to_non_nullable
+              as String?,
+      trackId: freezed == trackId
+          ? _value.trackId
+          : trackId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -114,11 +135,14 @@ abstract class _$$UserDataImplCopyWith<$Res>
   $Res call(
       {String fio,
       String email,
+      int? id,
       int? course,
       int? groupNumber,
       String? contacts,
       String? tags,
-      String? trackType});
+      String? trackType,
+      String? aboutSelf,
+      int? trackId});
 }
 
 /// @nodoc
@@ -134,11 +158,14 @@ class __$$UserDataImplCopyWithImpl<$Res>
   $Res call({
     Object? fio = null,
     Object? email = null,
+    Object? id = freezed,
     Object? course = freezed,
     Object? groupNumber = freezed,
     Object? contacts = freezed,
     Object? tags = freezed,
     Object? trackType = freezed,
+    Object? aboutSelf = freezed,
+    Object? trackId = freezed,
   }) {
     return _then(_$UserDataImpl(
       fio: null == fio
@@ -149,6 +176,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       course: freezed == course
           ? _value.course
           : course // ignore: cast_nullable_to_non_nullable
@@ -169,6 +200,14 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.trackType
           : trackType // ignore: cast_nullable_to_non_nullable
               as String?,
+      aboutSelf: freezed == aboutSelf
+          ? _value.aboutSelf
+          : aboutSelf // ignore: cast_nullable_to_non_nullable
+              as String?,
+      trackId: freezed == trackId
+          ? _value.trackId
+          : trackId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -179,11 +218,14 @@ class _$UserDataImpl implements _UserData {
   const _$UserDataImpl(
       {required this.fio,
       required this.email,
+      this.id,
       this.course,
       this.groupNumber,
       this.contacts,
       this.tags,
-      this.trackType});
+      this.trackType,
+      this.aboutSelf,
+      this.trackId});
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
@@ -192,6 +234,8 @@ class _$UserDataImpl implements _UserData {
   final String fio;
   @override
   final String email;
+  @override
+  final int? id;
   @override
   final int? course;
   @override
@@ -202,10 +246,14 @@ class _$UserDataImpl implements _UserData {
   final String? tags;
   @override
   final String? trackType;
+  @override
+  final String? aboutSelf;
+  @override
+  final int? trackId;
 
   @override
   String toString() {
-    return 'UserData(fio: $fio, email: $email, course: $course, groupNumber: $groupNumber, contacts: $contacts, tags: $tags, trackType: $trackType)';
+    return 'UserData(fio: $fio, email: $email, id: $id, course: $course, groupNumber: $groupNumber, contacts: $contacts, tags: $tags, trackType: $trackType, aboutSelf: $aboutSelf, trackId: $trackId)';
   }
 
   @override
@@ -215,6 +263,7 @@ class _$UserDataImpl implements _UserData {
             other is _$UserDataImpl &&
             (identical(other.fio, fio) || other.fio == fio) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.course, course) || other.course == course) &&
             (identical(other.groupNumber, groupNumber) ||
                 other.groupNumber == groupNumber) &&
@@ -222,13 +271,16 @@ class _$UserDataImpl implements _UserData {
                 other.contacts == contacts) &&
             (identical(other.tags, tags) || other.tags == tags) &&
             (identical(other.trackType, trackType) ||
-                other.trackType == trackType));
+                other.trackType == trackType) &&
+            (identical(other.aboutSelf, aboutSelf) ||
+                other.aboutSelf == aboutSelf) &&
+            (identical(other.trackId, trackId) || other.trackId == trackId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, fio, email, course, groupNumber, contacts, tags, trackType);
+  int get hashCode => Object.hash(runtimeType, fio, email, id, course,
+      groupNumber, contacts, tags, trackType, aboutSelf, trackId);
 
   @JsonKey(ignore: true)
   @override
@@ -248,11 +300,14 @@ abstract class _UserData implements UserData {
   const factory _UserData(
       {required final String fio,
       required final String email,
+      final int? id,
       final int? course,
       final int? groupNumber,
       final String? contacts,
       final String? tags,
-      final String? trackType}) = _$UserDataImpl;
+      final String? trackType,
+      final String? aboutSelf,
+      final int? trackId}) = _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
       _$UserDataImpl.fromJson;
@@ -261,6 +316,8 @@ abstract class _UserData implements UserData {
   String get fio;
   @override
   String get email;
+  @override
+  int? get id;
   @override
   int? get course;
   @override
@@ -271,6 +328,10 @@ abstract class _UserData implements UserData {
   String? get tags;
   @override
   String? get trackType;
+  @override
+  String? get aboutSelf;
+  @override
+  int? get trackId;
   @override
   @JsonKey(ignore: true)
   _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith =>
