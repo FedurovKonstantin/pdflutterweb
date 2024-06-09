@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pd_web/profile/team/team_view.dart';
 import 'package:pd_web/theme.dart';
 import 'package:pd_web/ts/teams/teams_filter_controller.dart';
 
@@ -23,6 +25,9 @@ class TeamsView extends StatelessWidget {
                   children: data.teams
                       .map(
                         (e) => TSCard(
+                          onTap: () {
+                            context.go('/team?id=${e.id}');
+                          },
                           title: e.name ?? '',
                           subtitle: '',
                           body: e.about ?? '',

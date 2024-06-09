@@ -51,8 +51,8 @@ class ResponcesController {
         );
 
         controller.add(result);
-      } catch (e) {
-        print(e);
+      } catch (e, s) {
+        print(s);
       }
     }
   }

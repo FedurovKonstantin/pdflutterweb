@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pd_web/profile/team/team_controller.dart';
 import 'package:pd_web/ts/teams/teams_filter_controller.dart';
@@ -33,6 +34,7 @@ class RequestsController {
   }
 
   Future<void> loadRequests() async {
+    await teamController.updateTeam();
     final id = teamController.controller.value.id;
 
     if (id != null) {
@@ -44,11 +46,17 @@ class RequestsController {
           },
         );
 
-        final result = RequestsData.fromJson(responce.data);
+        final result = RequestsData.fromJson({'users': responce.data});
 
         controller.add(result);
-      } catch (e) {
-        print(e);
+      } on DioException catch (e, s) {
+        controller.add(
+          controller.value.copyWith(
+            users: [],
+          ),
+        );
+      } catch (e, s) {
+        print(s);
       }
     }
   }

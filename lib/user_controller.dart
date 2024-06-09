@@ -61,8 +61,8 @@ class UserController {
       }
 
       teamsController.loadTeams();
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      print(s);
     }
   }
 }

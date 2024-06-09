@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pd_web/profile/profile_page.dart';
-import 'package:pd_web/tracks/track_page.dart';
+import 'package:pd_web/profile/team/team_view.dart';
+import 'package:pd_web/profile/team/team_view_from_id.dart';
 import 'package:pd_web/theme.dart';
+import 'package:pd_web/tracks/track_page.dart';
 import 'package:pd_web/user_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'dart:js' as js;
@@ -40,6 +42,16 @@ final _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => Home(),
+      routes: [
+        GoRoute(
+          path: 'team',
+          builder: (context, state) {
+            return TeamViewFromId(
+              id: int.parse(state.uri.queryParameters['id'] as String),
+            );
+          },
+        ),
+      ],
     ),
     GoRoute(
       path: '/sign_in',

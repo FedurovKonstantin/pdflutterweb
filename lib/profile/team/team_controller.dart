@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pd_web/profile/requests/requests_controller.dart';
 import 'package:pd_web/ts/teams/teams_filter_controller.dart';
 import 'package:pd_web/user_controller.dart';
 import 'package:rxdart/subjects.dart';
@@ -11,7 +12,7 @@ part 'team_controller.g.dart';
 @freezed
 class TeamData with _$TeamData {
   const factory TeamData({
-    int? id,
+    @JsonKey(includeIfNull: false) int? id,
     int? captainId,
     String? name,
     String? about,
@@ -20,6 +21,7 @@ class TeamData with _$TeamData {
     bool? fullFlag,
     String? tags,
     List<UserData>? students,
+    String? candidates,
   }) = _TeamData;
 
   factory TeamData.fromJson(Map<String, Object?> json) =>
@@ -35,21 +37,61 @@ class TeamController {
 
   TeamController() {}
 
-  // void selectTrackType(String trackType) {
-  //   controller.add(
-  //     controller.value.copyWith(
-  //       trackType: trackType,
-  //     ),
-  //   );
-  // }
+  Future<void> approveStudent(
+    int? studentId,
+  ) async {
+    final teamId = controller.value.id;
+    try {
+      final responce = await dio.get(
+        '/api/v1/teams/approveStudent',
+        queryParameters: {
+          'studentId': studentId,
+          'teamId': teamId,
+        },
+      );
+      print(responce.data);
+    } catch (e, s) {
+      print(s);
+    }
 
-  // void selectCourse(int course) {
-  //   controller.add(
-  //     controller.value.copyWith(
-  //       course: course,
-  //     ),
-  //   );
-  // }
+    requestsController.loadRequests();
+  }
+
+  Future<void> declineStudent(
+    int? studentId,
+  ) async {
+    final teamId = controller.value.id;
+    try {
+      final responce = await dio.get(
+        '/api/v1/teams/declineStudent',
+        queryParameters: {
+          'studentId': studentId,
+          'teamId': teamId,
+        },
+      );
+      print(responce.data);
+    } catch (e, s) {
+      print(s);
+    }
+
+    requestsController.loadRequests();
+  }
+
+  Future<void> subscribeOnTeam(int? teamId) async {
+    try {
+      final responce = await dio.get(
+        '/api/v1/teams/subscribe',
+        queryParameters: {
+          'studentId': userController.controller.value.id,
+          'teamId': teamId
+        },
+      );
+
+      print(responce.data);
+    } catch (e, s) {
+      print(s);
+    }
+  }
 
   void selectSkill(String skill) {
     final skills = teamsController.controller.value.skills;
@@ -85,8 +127,8 @@ class TeamController {
           '/api/v1/teams/createTeam/${userController.controller.value.trackType}',
           data: team.toJson(),
         );
-      } catch (e) {
-        print(e);
+      } catch (e, s) {
+        print(s);
       }
     } else {
       try {
@@ -94,12 +136,10 @@ class TeamController {
           '/api/v1/teams/changeTeam',
           data: team.toJson(),
         );
-      } catch (e) {
-        print(e);
+      } catch (e, s) {
+        print(s);
       }
     }
-
-    updateTeam();
   }
 
   Future<void> updateTeam() async {
@@ -123,8 +163,8 @@ class TeamController {
         final updatedUser = userController.controller.value;
         controller.add(updatedUser.currentTeam!);
       }
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      print(s);
     }
   }
 }

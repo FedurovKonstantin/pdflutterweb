@@ -19,17 +19,27 @@ _$TeamDataImpl _$$TeamDataImplFromJson(Map<String, dynamic> json) =>
       students: (json['students'] as List<dynamic>?)
           ?.map((e) => UserData.fromJson(e as Map<String, dynamic>))
           .toList(),
+      candidates: json['candidates'] as String?,
     );
 
-Map<String, dynamic> _$$TeamDataImplToJson(_$TeamDataImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'captainId': instance.captainId,
-      'name': instance.name,
-      'about': instance.about,
-      'projectType': instance.projectType,
-      'quantityOfStudents': instance.quantityOfStudents,
-      'fullFlag': instance.fullFlag,
-      'tags': instance.tags,
-      'students': instance.students,
-    };
+Map<String, dynamic> _$$TeamDataImplToJson(_$TeamDataImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['captainId'] = instance.captainId;
+  val['name'] = instance.name;
+  val['about'] = instance.about;
+  val['projectType'] = instance.projectType;
+  val['quantityOfStudents'] = instance.quantityOfStudents;
+  val['fullFlag'] = instance.fullFlag;
+  val['tags'] = instance.tags;
+  val['students'] = instance.students;
+  val['candidates'] = instance.candidates;
+  return val;
+}
