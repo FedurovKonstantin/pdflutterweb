@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pd_web/profile/cv/cv_view.dart';
-import 'package:pd_web/profile/requests_view.dart';
-import 'package:pd_web/profile/responces_view.dart';
+import 'package:pd_web/profile/responces/responces_view.dart';
 import 'package:pd_web/theme.dart';
 
-import 'team_view.dart';
+import 'requests/requests_view.dart';
+import 'team/team_view.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      initialIndex: 0,
+      initialIndex: 3,
       child: Column(
         children: [
           Container(
@@ -39,17 +39,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 tabAlignment: TabAlignment.start,
                 isScrollable: true,
                 indicatorColor: PDTheme.primary,
-                tabs: [
-                  const Tab(
+                tabs: const [
+                  Tab(
                     text: 'Резюме',
                   ),
-                  const Tab(
+                  Tab(
                     text: 'Отклики',
                   ),
-                  const Tab(
+                  Tab(
                     text: 'Моя команда',
                   ),
-                  const Tab(
+                  Tab(
                     text: 'Заявки',
                   ),
                 ],
@@ -69,7 +69,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       canEdit: true,
                     ),
                     const ResponcesView(),
-                    const TeamView(),
+                    const TeamView(
+                      canEdit: true,
+                    ),
                     const RequestsView(),
                   ]![DefaultTabController.of(context).index],
                 ),

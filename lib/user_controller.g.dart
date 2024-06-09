@@ -18,6 +18,9 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       trackType: json['trackType'] as String?,
       aboutSelf: json['aboutSelf'] as String?,
       trackId: (json['trackId'] as num?)?.toInt(),
+      currentTeam: json['currentTeam'] == null
+          ? null
+          : TeamData.fromJson(json['currentTeam'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
@@ -32,4 +35,5 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'trackType': instance.trackType,
       'aboutSelf': instance.aboutSelf,
       'trackId': instance.trackId,
+      'currentTeam': instance.currentTeam,
     };

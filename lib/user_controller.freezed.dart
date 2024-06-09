@@ -30,6 +30,7 @@ mixin _$UserData {
   String? get trackType => throw _privateConstructorUsedError;
   String? get aboutSelf => throw _privateConstructorUsedError;
   int? get trackId => throw _privateConstructorUsedError;
+  TeamData? get currentTeam => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +53,10 @@ abstract class $UserDataCopyWith<$Res> {
       String? tags,
       String? trackType,
       String? aboutSelf,
-      int? trackId});
+      int? trackId,
+      TeamData? currentTeam});
+
+  $TeamDataCopyWith<$Res>? get currentTeam;
 }
 
 /// @nodoc
@@ -78,6 +82,7 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? trackType = freezed,
     Object? aboutSelf = freezed,
     Object? trackId = freezed,
+    Object? currentTeam = freezed,
   }) {
     return _then(_value.copyWith(
       fio: null == fio
@@ -120,7 +125,23 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.trackId
           : trackId // ignore: cast_nullable_to_non_nullable
               as int?,
+      currentTeam: freezed == currentTeam
+          ? _value.currentTeam
+          : currentTeam // ignore: cast_nullable_to_non_nullable
+              as TeamData?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TeamDataCopyWith<$Res>? get currentTeam {
+    if (_value.currentTeam == null) {
+      return null;
+    }
+
+    return $TeamDataCopyWith<$Res>(_value.currentTeam!, (value) {
+      return _then(_value.copyWith(currentTeam: value) as $Val);
+    });
   }
 }
 
@@ -142,7 +163,11 @@ abstract class _$$UserDataImplCopyWith<$Res>
       String? tags,
       String? trackType,
       String? aboutSelf,
-      int? trackId});
+      int? trackId,
+      TeamData? currentTeam});
+
+  @override
+  $TeamDataCopyWith<$Res>? get currentTeam;
 }
 
 /// @nodoc
@@ -166,6 +191,7 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? trackType = freezed,
     Object? aboutSelf = freezed,
     Object? trackId = freezed,
+    Object? currentTeam = freezed,
   }) {
     return _then(_$UserDataImpl(
       fio: null == fio
@@ -208,6 +234,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.trackId
           : trackId // ignore: cast_nullable_to_non_nullable
               as int?,
+      currentTeam: freezed == currentTeam
+          ? _value.currentTeam
+          : currentTeam // ignore: cast_nullable_to_non_nullable
+              as TeamData?,
     ));
   }
 }
@@ -225,7 +255,8 @@ class _$UserDataImpl implements _UserData {
       this.tags,
       this.trackType,
       this.aboutSelf,
-      this.trackId});
+      this.trackId,
+      this.currentTeam});
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
@@ -250,10 +281,12 @@ class _$UserDataImpl implements _UserData {
   final String? aboutSelf;
   @override
   final int? trackId;
+  @override
+  final TeamData? currentTeam;
 
   @override
   String toString() {
-    return 'UserData(fio: $fio, email: $email, id: $id, course: $course, groupNumber: $groupNumber, contacts: $contacts, tags: $tags, trackType: $trackType, aboutSelf: $aboutSelf, trackId: $trackId)';
+    return 'UserData(fio: $fio, email: $email, id: $id, course: $course, groupNumber: $groupNumber, contacts: $contacts, tags: $tags, trackType: $trackType, aboutSelf: $aboutSelf, trackId: $trackId, currentTeam: $currentTeam)';
   }
 
   @override
@@ -274,13 +307,15 @@ class _$UserDataImpl implements _UserData {
                 other.trackType == trackType) &&
             (identical(other.aboutSelf, aboutSelf) ||
                 other.aboutSelf == aboutSelf) &&
-            (identical(other.trackId, trackId) || other.trackId == trackId));
+            (identical(other.trackId, trackId) || other.trackId == trackId) &&
+            (identical(other.currentTeam, currentTeam) ||
+                other.currentTeam == currentTeam));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, fio, email, id, course,
-      groupNumber, contacts, tags, trackType, aboutSelf, trackId);
+      groupNumber, contacts, tags, trackType, aboutSelf, trackId, currentTeam);
 
   @JsonKey(ignore: true)
   @override
@@ -307,7 +342,8 @@ abstract class _UserData implements UserData {
       final String? tags,
       final String? trackType,
       final String? aboutSelf,
-      final int? trackId}) = _$UserDataImpl;
+      final int? trackId,
+      final TeamData? currentTeam}) = _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
       _$UserDataImpl.fromJson;
@@ -332,6 +368,8 @@ abstract class _UserData implements UserData {
   String? get aboutSelf;
   @override
   int? get trackId;
+  @override
+  TeamData? get currentTeam;
   @override
   @JsonKey(ignore: true)
   _$$UserDataImplCopyWith<_$UserDataImpl> get copyWith =>

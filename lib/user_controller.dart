@@ -4,6 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pd_web/ts/teams/teams_filter_controller.dart';
 import 'package:rxdart/subjects.dart';
 
+import 'profile/team/team_controller.dart';
+
 part 'user_controller.freezed.dart';
 part 'user_controller.g.dart';
 
@@ -20,6 +22,7 @@ class UserData with _$UserData {
     String? trackType,
     String? aboutSelf,
     int? trackId,
+    TeamData? currentTeam,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, Object?> json) =>

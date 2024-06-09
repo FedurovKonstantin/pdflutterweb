@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pd_web/profile/requests/requests_controller.dart';
 import 'package:pd_web/theme.dart';
 
 class RequestsView extends StatelessWidget {
@@ -6,29 +7,36 @@ class RequestsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        TSCard(
-          title: 'Иванов Иван Иванович',
-          subtitle: 'Любитель поиграть в игры',
-          body:
-              'Японский геймдизайнер, геймдиректор, сценарист, продюсер и актёр. Кодзима известен своеобразным авторским подходом к созданию игр; ещё до прихода в игровую индустрию он увлекался литературой и кинематографом и позже рассматривал разработку игр как новую возможность для художественного творчества.',
-          skills: ['Android', 'PHP', 'React'],
-          grades: ['1'],
-          skillsTitle: 'Что умею:',
-          onPrimary: () {},
-          onSecondary: () {},
-        ),
-      ]
-          .map((e) => Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: e,
-                ),
-              ))
-          .toList(),
-    );
+    return StreamBuilder(
+        stream: requestsController.controller.stream,
+        initialData: requestsController.controller.value,
+        builder: (context, snapshot) {
+          final data = snapshot.requireData;
+          return ListView(
+            children: data.users
+                    ?.map(
+                      (e) => TSCard(
+                        title: e.fio,
+                        subtitle: '',
+                        body: e.aboutSelf ?? '',
+                        skills: e.tags?.split(' ') ?? [],
+                        grades: ['${e.course ?? 0}'],
+                        skillsTitle: 'Что умею:',
+                        onPrimary: () {},
+                        onSecondary: () {},
+                      ),
+                    )
+                    .map((e) => Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: e,
+                          ),
+                        ))
+                    .toList() ??
+                [],
+          );
+        });
   }
 }
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pd_web/profile/requests_view.dart';
 import 'package:pd_web/theme.dart';
 import 'package:pd_web/ts/teams/teams_filter_controller.dart';
+
+import '../../profile/requests/requests_view.dart';
 
 class TeamsView extends StatelessWidget {
   const TeamsView({super.key});

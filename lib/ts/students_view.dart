@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pd_web/profile/requests_view.dart';
 import 'package:pd_web/theme.dart';
+
+import '../profile/requests/requests_view.dart';
 
 class StudentsView extends StatelessWidget {
   const StudentsView({super.key});
