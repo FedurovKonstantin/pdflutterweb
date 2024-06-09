@@ -53,8 +53,8 @@ class CVController {
           '/api/v1/students/register/${user.trackType == 'Бакалавр' ? 'master' : 'bachelor'}',
           data: user.toJson(),
         );
-      } catch (e) {
-        print(e);
+      } catch (e, s) {
+        print(s);
       }
     } else {
       try {
@@ -62,8 +62,8 @@ class CVController {
           '/api/v1/students/changeStudentData',
           data: user.toJson(),
         );
-      } catch (e) {
-        print(e);
+      } catch (e, s) {
+        print(s);
       }
     }
 

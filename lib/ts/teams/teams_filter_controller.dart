@@ -99,8 +99,8 @@ class TeamsController {
         ),
       );
       print(teams);
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      print(s);
     }
   }
 
@@ -184,8 +184,8 @@ class TeamsController {
           tracks: [tracks.name],
         ),
       );
-    } catch (e) {
-      print(e);
+    } catch (e, s) {
+      print(s);
     }
   }
 }
