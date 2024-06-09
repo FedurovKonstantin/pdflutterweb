@@ -7,6 +7,7 @@ import 'package:pd_web/profile/profile_page.dart';
 import 'package:pd_web/profile/team/team_view.dart';
 import 'package:pd_web/profile/team/team_view_from_id.dart';
 import 'package:pd_web/theme.dart';
+import 'package:pd_web/tracks/track_page.dart';
 import 'package:pd_web/user_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'dart:js' as js;
@@ -16,11 +17,11 @@ final _router = GoRouter(
   redirect: (context, state) async {
     // userController.setUser(
     //   UserData(
-    //     fio: 'Федуров',
-    //     email: 'fedurov@sfedu.ru',
+    //     fio: 'Кроль Олег Владимирович',
+    //     email: 'krol@sfedu.ru',
     //   ),
     // );
-    // userController.updateUser();
+    userController.updateUser();
     final token = state.uri.queryParameters['token'];
     if (token != null && state.fullPath == '/') {
       final decodedToken = JwtDecoder.decode(token);
@@ -112,7 +113,7 @@ class _HomeState extends State<Home> {
   late final content = <String, Widget>{
     "Команды и студенты": const TSPage(),
     "Профиль": const ProfilePage(),
-    "Треки": Container(),
+    "Треки": TrackPage(),
     "Админка": Container(),
   };
 
