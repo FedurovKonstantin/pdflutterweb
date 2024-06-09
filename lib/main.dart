@@ -64,7 +64,12 @@ final _router = GoRouter(
               [link],
             );
           },
-          child: Text('Войти'),
+          child: Text(
+            'Войти',
+            style: TextStyle(
+              fontSize: 30,
+            ),
+          ),
         ),
       ),
     ),
