@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pd_web/profile/profile_page.dart';
+import 'package:pd_web/tracks/track_page.dart';
 import 'package:pd_web/theme.dart';
 import 'package:pd_web/user_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -12,28 +13,28 @@ import 'ts/ts_page.dart';
 
 final _router = GoRouter(
   redirect: (context, state) async {
-    // userController.setUser(
-    //   UserData(
-    //     fio: 'Федуров',
-    //     email: 'fedurov@sfedu.ru',
-    //   ),
-    // );
-    // userController.updateUser();
-    final token = state.uri.queryParameters['token'];
-    if (token != null && state.fullPath == '/') {
-      final decodedToken = JwtDecoder.decode(token);
-      userController.setUser(
-        UserData(
-          fio: decodedToken['name'],
-          email: decodedToken['preferred_username'],
-        ),
-      );
+    userController.setUser(
+      UserData(
+        fio: 'Кроль Олег Владимирович',
+        email: 'krol@sfedu.ru',
+      ),
+    );
+    userController.updateUser();
+    // final token = state.uri.queryParameters['token'];
+    // if (token != null && state.fullPath == '/') {
+    //   final decodedToken = JwtDecoder.decode(token);
+    //   userController.setUser(
+    //     UserData(
+    //       fio: decodedToken['name'],
+    //       email: decodedToken['preferred_username'],
+    //     ),
+    //   );
 
-      userController.updateUser();
-      return '/';
-    } else if (userController.controller.valueOrNull == null) {
-      return '/sign_in';
-    }
+    //   userController.updateUser();
+    //   return '/';
+    // } else if (userController.controller.valueOrNull == null) {
+    //   return '/sign_in';
+    // }
   },
   routes: [
     GoRoute(
@@ -95,7 +96,7 @@ class _HomeState extends State<Home> {
   late final content = <String, Widget>{
     "Команды и студенты": const TSPage(),
     "Профиль": const ProfilePage(),
-    "Треки": Container(),
+    "Треки": TrackPage(),
     "Админка": Container(),
   };
 
