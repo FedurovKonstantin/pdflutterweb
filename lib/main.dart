@@ -13,28 +13,28 @@ import 'ts/ts_page.dart';
 
 final _router = GoRouter(
   redirect: (context, state) async {
-    userController.setUser(
-      UserData(
-        fio: 'Кроль Олег Владимирович',
-        email: 'krol@sfedu.ru',
-      ),
-    );
+    // userController.setUser(
+    //   UserData(
+    //     fio: 'Кроль Олег Владимирович',
+    //     email: 'krol@sfedu.ru',
+    //   ),
+    // );
     userController.updateUser();
-    // final token = state.uri.queryParameters['token'];
-    // if (token != null && state.fullPath == '/') {
-    //   final decodedToken = JwtDecoder.decode(token);
-    //   userController.setUser(
-    //     UserData(
-    //       fio: decodedToken['name'],
-    //       email: decodedToken['preferred_username'],
-    //     ),
-    //   );
+    final token = state.uri.queryParameters['token'];
+    if (token != null && state.fullPath == '/') {
+      final decodedToken = JwtDecoder.decode(token);
+      userController.setUser(
+        UserData(
+          fio: decodedToken['name'],
+          email: decodedToken['preferred_username'],
+        ),
+      );
 
-    //   userController.updateUser();
-    //   return '/';
-    // } else if (userController.controller.valueOrNull == null) {
-    //   return '/sign_in';
-    // }
+      userController.updateUser();
+      return '/';
+    } else if (userController.controller.valueOrNull == null) {
+      return '/sign_in';
+    }
   },
   routes: [
     GoRoute(
