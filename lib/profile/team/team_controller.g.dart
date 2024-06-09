@@ -9,6 +9,7 @@ part of 'team_controller.dart';
 _$TeamDataImpl _$$TeamDataImplFromJson(Map<String, dynamic> json) =>
     _$TeamDataImpl(
       id: (json['id'] as num?)?.toInt(),
+      captainId: (json['captainId'] as num?)?.toInt(),
       name: json['name'] as String?,
       about: json['about'] as String?,
       projectType: json['projectType'] as String?,
@@ -16,13 +17,14 @@ _$TeamDataImpl _$$TeamDataImplFromJson(Map<String, dynamic> json) =>
       fullFlag: json['fullFlag'] as bool?,
       tags: json['tags'] as String?,
       students: (json['students'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => UserData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$TeamDataImplToJson(_$TeamDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'captainId': instance.captainId,
       'name': instance.name,
       'about': instance.about,
       'projectType': instance.projectType,

@@ -29,23 +29,27 @@ class RequestsController {
   );
 
   RequestsController() {
-    _loadRequests();
+    loadRequests();
   }
 
-  Future<void> _loadRequests() async {
+  Future<void> loadRequests() async {
     final id = teamController.controller.value.id;
 
     if (id != null) {
-      final responce = await dio.get(
-        '/api/v1/teams/candidates',
-        queryParameters: {
-          'teamId': id,
-        },
-      );
+      try {
+        final responce = await dio.get(
+          '/api/v1/teams/candidates',
+          queryParameters: {
+            'teamId': id,
+          },
+        );
 
-      final result = RequestsData.fromJson(responce.data);
+        final result = RequestsData.fromJson(responce.data);
 
-      controller.add(result);
+        controller.add(result);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 }

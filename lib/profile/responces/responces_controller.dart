@@ -27,21 +27,33 @@ class ResponcesController {
   );
 
   ResponcesController() {
-    _loadResponces();
+    loadResponces();
   }
 
-  Future<void> _loadResponces() async {
+  Future<void> loadResponces() async {
     final id = userController.controller.value.id;
 
     if (id != null) {
-      final responce = await dio.get(
-        '/api/v1/students/getSubscriptionsById',
-        queryParameters: {'studentId': id},
-      );
+      try {
+        final responce = await dio.get(
+          '/api/v1/students/getSubscriptionsById',
+          queryParameters: {'studentId': id},
+        );
 
-      final result = ResponcesData.fromJson(responce.data);
+        if (responce.data.isEmpty) {
+          return;
+        }
 
-      controller.add(result);
+        final result = ResponcesData(
+          teams: responce.data.map(
+            (it) => TeamData.fromJson(it),
+          ),
+        );
+
+        controller.add(result);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 }

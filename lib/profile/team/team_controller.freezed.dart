@@ -21,13 +21,14 @@ TeamData _$TeamDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TeamData {
   int? get id => throw _privateConstructorUsedError;
+  int? get captainId => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
   String? get projectType => throw _privateConstructorUsedError;
   int? get quantityOfStudents => throw _privateConstructorUsedError;
   bool? get fullFlag => throw _privateConstructorUsedError;
   String? get tags => throw _privateConstructorUsedError;
-  List<String>? get students => throw _privateConstructorUsedError;
+  List<UserData>? get students => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,13 +43,14 @@ abstract class $TeamDataCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
+      int? captainId,
       String? name,
       String? about,
       String? projectType,
       int? quantityOfStudents,
       bool? fullFlag,
       String? tags,
-      List<String>? students});
+      List<UserData>? students});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$TeamDataCopyWithImpl<$Res, $Val extends TeamData>
   @override
   $Res call({
     Object? id = freezed,
+    Object? captainId = freezed,
     Object? name = freezed,
     Object? about = freezed,
     Object? projectType = freezed,
@@ -77,6 +80,10 @@ class _$TeamDataCopyWithImpl<$Res, $Val extends TeamData>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      captainId: freezed == captainId
+          ? _value.captainId
+          : captainId // ignore: cast_nullable_to_non_nullable
               as int?,
       name: freezed == name
           ? _value.name
@@ -105,7 +112,7 @@ class _$TeamDataCopyWithImpl<$Res, $Val extends TeamData>
       students: freezed == students
           ? _value.students
           : students // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<UserData>?,
     ) as $Val);
   }
 }
@@ -120,13 +127,14 @@ abstract class _$$TeamDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
+      int? captainId,
       String? name,
       String? about,
       String? projectType,
       int? quantityOfStudents,
       bool? fullFlag,
       String? tags,
-      List<String>? students});
+      List<UserData>? students});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$TeamDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? captainId = freezed,
     Object? name = freezed,
     Object? about = freezed,
     Object? projectType = freezed,
@@ -153,6 +162,10 @@ class __$$TeamDataImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      captainId: freezed == captainId
+          ? _value.captainId
+          : captainId // ignore: cast_nullable_to_non_nullable
               as int?,
       name: freezed == name
           ? _value.name
@@ -181,7 +194,7 @@ class __$$TeamDataImplCopyWithImpl<$Res>
       students: freezed == students
           ? _value._students
           : students // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<UserData>?,
     ));
   }
 }
@@ -191,13 +204,14 @@ class __$$TeamDataImplCopyWithImpl<$Res>
 class _$TeamDataImpl implements _TeamData {
   const _$TeamDataImpl(
       {this.id,
+      this.captainId,
       this.name,
       this.about,
       this.projectType,
       this.quantityOfStudents,
       this.fullFlag,
       this.tags,
-      final List<String>? students})
+      final List<UserData>? students})
       : _students = students;
 
   factory _$TeamDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -205,6 +219,8 @@ class _$TeamDataImpl implements _TeamData {
 
   @override
   final int? id;
+  @override
+  final int? captainId;
   @override
   final String? name;
   @override
@@ -217,9 +233,9 @@ class _$TeamDataImpl implements _TeamData {
   final bool? fullFlag;
   @override
   final String? tags;
-  final List<String>? _students;
+  final List<UserData>? _students;
   @override
-  List<String>? get students {
+  List<UserData>? get students {
     final value = _students;
     if (value == null) return null;
     if (_students is EqualUnmodifiableListView) return _students;
@@ -229,7 +245,7 @@ class _$TeamDataImpl implements _TeamData {
 
   @override
   String toString() {
-    return 'TeamData(id: $id, name: $name, about: $about, projectType: $projectType, quantityOfStudents: $quantityOfStudents, fullFlag: $fullFlag, tags: $tags, students: $students)';
+    return 'TeamData(id: $id, captainId: $captainId, name: $name, about: $about, projectType: $projectType, quantityOfStudents: $quantityOfStudents, fullFlag: $fullFlag, tags: $tags, students: $students)';
   }
 
   @override
@@ -238,6 +254,8 @@ class _$TeamDataImpl implements _TeamData {
         (other.runtimeType == runtimeType &&
             other is _$TeamDataImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.captainId, captainId) ||
+                other.captainId == captainId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.about, about) || other.about == about) &&
             (identical(other.projectType, projectType) ||
@@ -255,6 +273,7 @@ class _$TeamDataImpl implements _TeamData {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      captainId,
       name,
       about,
       projectType,
@@ -280,19 +299,22 @@ class _$TeamDataImpl implements _TeamData {
 abstract class _TeamData implements TeamData {
   const factory _TeamData(
       {final int? id,
+      final int? captainId,
       final String? name,
       final String? about,
       final String? projectType,
       final int? quantityOfStudents,
       final bool? fullFlag,
       final String? tags,
-      final List<String>? students}) = _$TeamDataImpl;
+      final List<UserData>? students}) = _$TeamDataImpl;
 
   factory _TeamData.fromJson(Map<String, dynamic> json) =
       _$TeamDataImpl.fromJson;
 
   @override
   int? get id;
+  @override
+  int? get captainId;
   @override
   String? get name;
   @override
@@ -306,7 +328,7 @@ abstract class _TeamData implements TeamData {
   @override
   String? get tags;
   @override
-  List<String>? get students;
+  List<UserData>? get students;
   @override
   @JsonKey(ignore: true)
   _$$TeamDataImplCopyWith<_$TeamDataImpl> get copyWith =>

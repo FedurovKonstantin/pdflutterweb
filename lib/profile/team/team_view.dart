@@ -31,6 +31,12 @@ class _TeamViewState extends State<TeamView> {
   final newMemberController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    teamController.updateTeam();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<TeamData>(
       stream: Rx.combineLatest2(
@@ -110,21 +116,6 @@ class _TeamViewState extends State<TeamView> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              '''Для формирования заявки необходимо чтобы команда соответствовала требованиям:
-    1. В случае Магистратуры команда должна состоять из 3-7 человек.
-    2. В случае Бакалавриата команда должна состоять из 3-7 человек. При этом 1 человек может быть 2 курса''',
-              style: TextStyle(
-                color: Color(0xff6C757D),
-                height: 1.8,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
             Row(
               children: [
                 const SizedBox(
@@ -185,7 +176,7 @@ class _TeamViewState extends State<TeamView> {
                               child: TextField(
                                 enabled: widget.canEdit,
                                 controller: TextEditingController(
-                                  text: it,
+                                  text: it.email,
                                 ),
                                 decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
@@ -206,63 +197,6 @@ class _TeamViewState extends State<TeamView> {
                     )
                     .toList() ??
                 [],
-            Row(
-              children: [
-                const SizedBox(
-                  width: 100,
-                  child: Text(
-                    'Участник',
-                    style: TextStyle(
-                      color: Color(0xff6C757D),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: TextField(
-                    enabled: widget.canEdit,
-                    controller: newMemberController,
-                    decoration: const InputDecoration(
-                      hintText: 'malvina@sfedu.ru',
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 9,
-                        horizontal: 16,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xffDEE2E6),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: OutlinedButton(
-                onPressed: () {
-                  if (widget.canEdit) {
-                    setState(() {
-                      teamController.controller.add(
-                        data.copyWith(
-                          students: List.of(data.students ?? [])
-                            ..add(newMemberController.text),
-                        ),
-                      );
-                      newMemberController.text = '';
-                    });
-                  }
-                },
-                child: const Text(
-                  '+ Добавить участника',
-                ),
-              ),
-            ),
             const SizedBox(
               height: 24,
             ),

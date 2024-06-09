@@ -24,6 +24,12 @@ class _CVViewState extends State<CVView> {
   final contactsController = TextEditingController(
     text: userController.controller.value.contacts ?? '',
   );
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

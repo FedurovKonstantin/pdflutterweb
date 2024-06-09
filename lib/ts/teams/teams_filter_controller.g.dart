@@ -30,6 +30,9 @@ _$TeamsFilterDataImpl _$$TeamsFilterDataImplFromJson(
       projectTypes: (json['projectTypes'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      teams: (json['teams'] as List<dynamic>)
+          .map((e) => TeamData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$TeamsFilterDataImplToJson(
@@ -43,6 +46,7 @@ Map<String, dynamic> _$$TeamsFilterDataImplToJson(
       'cources': instance.cources,
       'selectedProjectTypes': instance.selectedProjectTypes,
       'projectTypes': instance.projectTypes,
+      'teams': instance.teams,
     };
 
 _$TrackDataImpl _$$TrackDataImplFromJson(Map<String, dynamic> json) =>

@@ -5,8 +5,19 @@ import 'package:rxdart/rxdart.dart';
 
 import '../requests/requests_view.dart';
 
-class ResponcesView extends StatelessWidget {
+class ResponcesView extends StatefulWidget {
   const ResponcesView({super.key});
+
+  @override
+  State<ResponcesView> createState() => _ResponcesViewState();
+}
+
+class _ResponcesViewState extends State<ResponcesView> {
+  @override
+  void initState() {
+    super.initState();
+    responcesController.loadResponces();
+  }
 
   @override
   Widget build(BuildContext context) {

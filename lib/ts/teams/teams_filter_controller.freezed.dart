@@ -28,6 +28,7 @@ mixin _$TeamsFilterData {
   List<String> get cources => throw _privateConstructorUsedError;
   List<String> get selectedProjectTypes => throw _privateConstructorUsedError;
   List<String> get projectTypes => throw _privateConstructorUsedError;
+  List<TeamData> get teams => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $TeamsFilterDataCopyWith<$Res> {
       List<String> selectedCourses,
       List<String> cources,
       List<String> selectedProjectTypes,
-      List<String> projectTypes});
+      List<String> projectTypes,
+      List<TeamData> teams});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$TeamsFilterDataCopyWithImpl<$Res, $Val extends TeamsFilterData>
     Object? cources = null,
     Object? selectedProjectTypes = null,
     Object? projectTypes = null,
+    Object? teams = null,
   }) {
     return _then(_value.copyWith(
       selectedSkills: null == selectedSkills
@@ -107,6 +110,10 @@ class _$TeamsFilterDataCopyWithImpl<$Res, $Val extends TeamsFilterData>
           ? _value.projectTypes
           : projectTypes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      teams: null == teams
+          ? _value.teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<TeamData>,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$TeamsFilterDataImplCopyWith<$Res>
       List<String> selectedCourses,
       List<String> cources,
       List<String> selectedProjectTypes,
-      List<String> projectTypes});
+      List<String> projectTypes,
+      List<TeamData> teams});
 }
 
 /// @nodoc
@@ -149,6 +157,7 @@ class __$$TeamsFilterDataImplCopyWithImpl<$Res>
     Object? cources = null,
     Object? selectedProjectTypes = null,
     Object? projectTypes = null,
+    Object? teams = null,
   }) {
     return _then(_$TeamsFilterDataImpl(
       selectedSkills: null == selectedSkills
@@ -183,6 +192,10 @@ class __$$TeamsFilterDataImplCopyWithImpl<$Res>
           ? _value._projectTypes
           : projectTypes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      teams: null == teams
+          ? _value._teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<TeamData>,
     ));
   }
 }
@@ -198,7 +211,8 @@ class _$TeamsFilterDataImpl implements _TeamsFilterData {
       required final List<String> selectedCourses,
       required final List<String> cources,
       required final List<String> selectedProjectTypes,
-      required final List<String> projectTypes})
+      required final List<String> projectTypes,
+      required final List<TeamData> teams})
       : _selectedSkills = selectedSkills,
         _skills = skills,
         _selectedTracks = selectedTracks,
@@ -206,7 +220,8 @@ class _$TeamsFilterDataImpl implements _TeamsFilterData {
         _selectedCourses = selectedCourses,
         _cources = cources,
         _selectedProjectTypes = selectedProjectTypes,
-        _projectTypes = projectTypes;
+        _projectTypes = projectTypes,
+        _teams = teams;
 
   factory _$TeamsFilterDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$TeamsFilterDataImplFromJson(json);
@@ -276,9 +291,17 @@ class _$TeamsFilterDataImpl implements _TeamsFilterData {
     return EqualUnmodifiableListView(_projectTypes);
   }
 
+  final List<TeamData> _teams;
+  @override
+  List<TeamData> get teams {
+    if (_teams is EqualUnmodifiableListView) return _teams;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_teams);
+  }
+
   @override
   String toString() {
-    return 'TeamsFilterData(selectedSkills: $selectedSkills, skills: $skills, selectedTracks: $selectedTracks, tracks: $tracks, selectedCourses: $selectedCourses, cources: $cources, selectedProjectTypes: $selectedProjectTypes, projectTypes: $projectTypes)';
+    return 'TeamsFilterData(selectedSkills: $selectedSkills, skills: $skills, selectedTracks: $selectedTracks, tracks: $tracks, selectedCourses: $selectedCourses, cources: $cources, selectedProjectTypes: $selectedProjectTypes, projectTypes: $projectTypes, teams: $teams)';
   }
 
   @override
@@ -298,7 +321,8 @@ class _$TeamsFilterDataImpl implements _TeamsFilterData {
             const DeepCollectionEquality()
                 .equals(other._selectedProjectTypes, _selectedProjectTypes) &&
             const DeepCollectionEquality()
-                .equals(other._projectTypes, _projectTypes));
+                .equals(other._projectTypes, _projectTypes) &&
+            const DeepCollectionEquality().equals(other._teams, _teams));
   }
 
   @JsonKey(ignore: true)
@@ -312,7 +336,8 @@ class _$TeamsFilterDataImpl implements _TeamsFilterData {
       const DeepCollectionEquality().hash(_selectedCourses),
       const DeepCollectionEquality().hash(_cources),
       const DeepCollectionEquality().hash(_selectedProjectTypes),
-      const DeepCollectionEquality().hash(_projectTypes));
+      const DeepCollectionEquality().hash(_projectTypes),
+      const DeepCollectionEquality().hash(_teams));
 
   @JsonKey(ignore: true)
   @override
@@ -338,7 +363,8 @@ abstract class _TeamsFilterData implements TeamsFilterData {
       required final List<String> selectedCourses,
       required final List<String> cources,
       required final List<String> selectedProjectTypes,
-      required final List<String> projectTypes}) = _$TeamsFilterDataImpl;
+      required final List<String> projectTypes,
+      required final List<TeamData> teams}) = _$TeamsFilterDataImpl;
 
   factory _TeamsFilterData.fromJson(Map<String, dynamic> json) =
       _$TeamsFilterDataImpl.fromJson;
@@ -359,6 +385,8 @@ abstract class _TeamsFilterData implements TeamsFilterData {
   List<String> get selectedProjectTypes;
   @override
   List<String> get projectTypes;
+  @override
+  List<TeamData> get teams;
   @override
   @JsonKey(ignore: true)
   _$$TeamsFilterDataImplCopyWith<_$TeamsFilterDataImpl> get copyWith =>

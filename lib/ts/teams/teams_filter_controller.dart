@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pd_web/profile/team/team_controller.dart';
+import 'package:pd_web/user_controller.dart';
 import 'package:rxdart/subjects.dart';
 
 part 'teams_filter_controller.freezed.dart';
@@ -20,6 +22,7 @@ class TeamsFilterData with _$TeamsFilterData {
     required List<String> cources,
     required List<String> selectedProjectTypes,
     required List<String> projectTypes,
+    required List<TeamData> teams,
   }) = _TeamsFilterData;
 
   static const initial = TeamsFilterData(
@@ -34,6 +37,7 @@ class TeamsFilterData with _$TeamsFilterData {
       'Игра',
       'Мобильное приложение',
     ],
+    teams: [],
   );
 
   factory TeamsFilterData.fromJson(Map<String, Object?> json) =>
@@ -62,8 +66,42 @@ class TeamsController {
   final controller = BehaviorSubject.seeded(TeamsFilterData.initial);
 
   TeamsController() {
-    _loadSkills();
-    _loadTracks();
+    loadSkills();
+    loadTracks();
+    loadTeams();
+  }
+  Future<void> loadTeams() async {
+    final user = userController.controller.value;
+    try {
+      final responce = await dio.get(
+        '/api/v1/teams/allTeamsByCurrentTrack',
+        queryParameters: {'type': user.trackType},
+      );
+      final teams = (responce.data as List<dynamic>)
+          .map((it) => TeamData.fromJson(it))
+          .toList();
+
+      final selectedSkills = controller.value.selectedSkills;
+
+      if (selectedSkills.isNotEmpty) {
+        teams.retainWhere(
+          (it) => (it.tags?.split(' ') ?? []).any(
+            (element) => selectedSkills.contains(
+              element,
+            ),
+          ),
+        );
+      }
+
+      controller.add(
+        controller.value.copyWith(
+          teams: teams,
+        ),
+      );
+      print(teams);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void selectSkill(String skill) {
@@ -81,6 +119,7 @@ class TeamsController {
         ),
       );
     }
+    loadTeams();
   }
 
   void selectTrack(String track) {
@@ -118,7 +157,7 @@ class TeamsController {
     }
   }
 
-  Future<void> _loadSkills() async {
+  Future<void> loadSkills() async {
     final responce = await dio.get('/api/v1/tags');
     final skills = (responce.data as String).split(' ');
     controller.add(
@@ -128,18 +167,25 @@ class TeamsController {
     );
   }
 
-  Future<void> _loadTracks() async {
-    final responce = await dio.get('/api/v1/tracks/all');
-    final tracks = (responce.data as List<dynamic>)
-        .map(
-          (e) => TrackData.fromJson(e),
-        )
-        .map((e) => e.name)
-        .toList();
-    controller.add(
-      controller.value.copyWith(
-        tracks: tracks,
-      ),
-    );
+  Future<void> loadTracks() async {
+    final type = userController.controller.value.trackType;
+    if (type == null) {
+      return;
+    }
+    try {
+      print('wer');
+      final responce = await dio.get(
+        '/api/v1/tracks/currentTrack',
+        queryParameters: {"type": type},
+      );
+      final tracks = TrackData.fromJson(responce.data);
+      controller.add(
+        controller.value.copyWith(
+          tracks: [tracks.name],
+        ),
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:pd_web/profile/requests/requests_controller.dart';
 import 'package:pd_web/theme.dart';
 
-class RequestsView extends StatelessWidget {
+class RequestsView extends StatefulWidget {
   const RequestsView({super.key});
+
+  @override
+  State<RequestsView> createState() => _RequestsViewState();
+}
+
+class _RequestsViewState extends State<RequestsView> {
+  @override
+  void initState() {
+    super.initState();
+    requestsController.loadRequests();
+  }
 
   @override
   Widget build(BuildContext context) {

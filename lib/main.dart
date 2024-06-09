@@ -12,28 +12,28 @@ import 'ts/ts_page.dart';
 
 final _router = GoRouter(
   redirect: (context, state) async {
-    userController.setUser(
-      UserData(
-        fio: 'Федуров',
-        email: 'fedurov@sfedu.ru',
-      ),
-    );
-    userController.updateUser();
-    // final token = state.uri.queryParameters['token'];
-    // if (token != null && state.fullPath == '/') {
-    //   final decodedToken = JwtDecoder.decode(token);
-    //   userController.setUser(
-    //     UserData(
-    //       fio: decodedToken['name'],
-    //       email: decodedToken['preferred_username'],
-    //     ),
-    //   );
+    // userController.setUser(
+    //   UserData(
+    //     fio: 'Федуров',
+    //     email: 'fedurov@sfedu.ru',
+    //   ),
+    // );
+    // userController.updateUser();
+    final token = state.uri.queryParameters['token'];
+    if (token != null && state.fullPath == '/') {
+      final decodedToken = JwtDecoder.decode(token);
+      userController.setUser(
+        UserData(
+          fio: decodedToken['name'],
+          email: decodedToken['preferred_username'],
+        ),
+      );
 
-    //   userController.updateUser();
-    //   return '/';
-    // } else if (userController.controller.valueOrNull == null) {
-    //   return '/sign_in';
-    // }
+      userController.updateUser();
+      return '/';
+    } else if (userController.controller.valueOrNull == null) {
+      return '/sign_in';
+    }
   },
   routes: [
     GoRoute(
@@ -90,7 +90,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late var currentContent = content.keys.toList()[1];
+  late var currentContent = content.keys.toList()[0];
 
   late final content = <String, Widget>{
     "Команды и студенты": const TSPage(),

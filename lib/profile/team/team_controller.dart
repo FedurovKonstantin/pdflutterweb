@@ -12,13 +12,14 @@ part 'team_controller.g.dart';
 class TeamData with _$TeamData {
   const factory TeamData({
     int? id,
+    int? captainId,
     String? name,
     String? about,
     String? projectType,
     int? quantityOfStudents,
     bool? fullFlag,
     String? tags,
-    List<String>? students,
+    List<UserData>? students,
   }) = _TeamData;
 
   factory TeamData.fromJson(Map<String, Object?> json) =>
@@ -70,11 +71,18 @@ class TeamController {
 
   Future<void> save() async {
     final team = controller.value;
+
+    controller.add(
+      team.copyWith(
+        captainId: userController.controller.value.id,
+      ),
+    );
     if (team.id == null) {
+      final team = controller.value;
       print(team.toJson());
       try {
         await dio.post(
-          '/api/v1/teams/createTeam/${userController.controller.value.trackType == 'Бакалавр' ? 'master' : 'bachelor'}',
+          '/api/v1/teams/createTeam/${userController.controller.value.trackType}',
           data: team.toJson(),
         );
       } catch (e) {
@@ -99,7 +107,21 @@ class TeamController {
       await userController.updateUser();
       final user = userController.controller.value;
       if (user.currentTeam != null) {
-        controller.add(user.currentTeam!);
+        final responce = await dio.get(
+          '/api/v1/teams/getTeamById',
+          queryParameters: {
+            'teamId': user.currentTeam?.id,
+          },
+        );
+        final team = TeamData.fromJson(responce.data);
+        print(team.toJson());
+        userController.controller.add(
+          user.copyWith(
+            currentTeam: team,
+          ),
+        );
+        final updatedUser = userController.controller.value;
+        controller.add(updatedUser.currentTeam!);
       }
     } catch (e) {
       print(e);
